@@ -1,6 +1,3 @@
-Sure! Here's your full README content in Markdown format, ready to copy and paste into a file named `README.md`:
-
-```markdown
 # Zendesk MCP Server (Model Context Protocol)
 
 This project is a lightweight, AI-native MCP (Model Context Protocol) server that integrates with Zendesk's REST APIs. It allows GPT-based AI agents (e.g. OpenAI, LangChain) to fetch real-time customer and organization context dynamically.
@@ -111,6 +108,49 @@ Alice Smith is a Premium customer under Acme Corp. She submitted 3 tickets recen
 
 ---
 
+## Web Chat Interface + OpenAI Router API
+
+To demonstrate end-to-end usage with real input/output, this project includes:
+
+### 1. `/chat` API endpoint (`openai-router.js`)
+A Node.js API that accepts natural language messages, detects intent using GPT-4 + function calling, and uses the MCP server to fetch data and compose replies.
+
+#### 🔧 .env additions:
+```env
+OPENAI_API_KEY=your_openai_key
+MCP_SERVER_URL=http://localhost:3000
+CHAT_PORT=4000
+```
+
+#### ▶️ Run the API:
+```bash
+node openai-router.js
+```
+
+This starts a server at `http://localhost:4000/chat`
+
+### 2. `chat-ui.html`
+A simple HTML frontend to type user prompts and see AI-generated responses with Zendesk context.
+
+#### 🧪 Example Questions:
+- Who is the user for ticket 12345?
+- Tell me about organization 78901
+- How many tickets has user 112233 opened?
+
+#### 💬 Usage
+- Open `chat-ui.html` in a browser
+- Ensure the `/chat` endpoint is running with CORS enabled
+- Ask questions and see the result appear naturally
+
+#### 🔐 Note
+Make sure you install and enable CORS in `openai-router.js`:
+```js
+const cors = require('cors');
+app.use(cors());
+```
+
+---
+
 ## Future Enhancements
 
 - LangChain tool compatibility
@@ -127,6 +167,3 @@ MIT
 
 ## Author
 Your Name — [@yourhandle](https://github.com/yourhandle)
-```
-
-Let me know if you want a version with your actual GitHub handle and project URL filled in!
